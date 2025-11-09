@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinical Scribe Assistant</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">CS</div>
+          <div>
+            <h1>Clinical Scribe</h1>
+            <p>Capture visits, structure notes, and share securely.</p>
+          </div>
+        </div>
+        <button class="primary" id="new-session">New session</button>
+      </header>
+
+      <main class="layout">
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Visit timeline</h2>
+            <span class="badge" id="event-count">0 events</span>
+          </div>
+          <ol id="timeline" class="timeline" aria-live="polite"></ol>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>SOAP summary</h2>
+            <div class="summary-tabs" role="tablist">
+              <button class="tab active" data-target="subjective" role="tab">Subjective</button>
+              <button class="tab" data-target="objective" role="tab">Objective</button>
+              <button class="tab" data-target="assessment" role="tab">Assessment</button>
+              <button class="tab" data-target="plan" role="tab">Plan</button>
+            </div>
+          </div>
+          <div class="summary-sections">
+            <article class="summary active" id="subjective" role="tabpanel">
+              <h3>Subjective</h3>
+              <p class="placeholder">No patient-reported data yet.</p>
+            </article>
+            <article class="summary" id="objective" role="tabpanel">
+              <h3>Objective</h3>
+              <p class="placeholder">Vitals, labs, and exam findings will appear here.</p>
+            </article>
+            <article class="summary" id="assessment" role="tabpanel">
+              <h3>Assessment</h3>
+              <p class="placeholder">Diagnostic impressions will be tracked in this space.</p>
+            </article>
+            <article class="summary" id="plan" role="tabpanel">
+              <h3>Plan</h3>
+              <p class="placeholder">Treatment steps and follow up actions will be listed here.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel transcription">
+          <div class="panel-header">
+            <h2>Live transcription</h2>
+            <span class="status" id="status">Disconnected</span>
+          </div>
+          <div class="transcript" id="transcript" aria-live="polite">
+            <p class="placeholder">Start a new session to begin capturing the conversation.</p>
+          </div>
+        </section>
+      </main>
+
+      <aside class="controls">
+        <form id="note-form" class="note-form">
+          <label for="note-text">Quick note</label>
+          <textarea
+            id="note-text"
+            name="note"
+            rows="3"
+            placeholder="Add a quick observation or reminder..."
+            aria-label="Add note"
+          ></textarea>
+          <div class="button-row">
+            <button type="submit" class="primary">Add to timeline</button>
+            <button type="button" id="clear-transcript" class="ghost">Clear transcript</button>
+          </div>
+        </form>
+      </aside>
+    </div>
+
+    <template id="timeline-item-template">
+      <li class="timeline-item">
+        <div class="timestamp"></div>
+        <div class="content">
+          <h3></h3>
+          <p></p>
+        </div>
+      </li>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
